@@ -30,14 +30,14 @@ if (command === 'add') {
     console.log("Duplicated title");
   } else {
     console.log("Note Created");
-    console.log('---');
-    console.log(`Title: ${note.title}`);
-    console.log(`Body: ${note.body}`);
+    notes.logNote(note)
   }
 } else if (command === 'list') {
   notes.getAll()
 } else if (command === 'read') {
-  notes.getNote(argv.title)
+  var getNote = notes.getNote(argv.title)
+  var message = getNote ? notes.logNote(getNote) : 'Note not found';
+  console.log(message);
 } else if (command === 'remove') {
   var noteRemoved = notes.removeNote(argv.title);
   var message = noteRemoved ? 'Note was removed' : 'Note not found ';
