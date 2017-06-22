@@ -54,6 +54,7 @@ var removeNote = (title) =>{
 }
 
 var logNote = (note) => {
+  debugger;
   return console.log(`\n---\nTitle :${note.title}\nBody: ${note.body}`);
 }
 
