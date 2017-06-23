@@ -1,5 +1,3 @@
-console.log('Starting app.js');
-
 const fs = require('fs');
 const _ = require('lodash');
 const yargs = require('yargs');
@@ -18,11 +16,31 @@ console.log("Result : ", notes.add(2,23));
 var filteredArray = _.uniq(['Mike', 1 , 'Lucas',1,2,3,4])
 console.log(filteredArray);
 */
-var argv = yargs.argv;
-var command = process.argv[2];
 
-console.log('Command: ', command);
-console.log('Yargs', argv);
+var titleOptions = {
+  describe : 'Title of note',
+  demand : true,
+  alias : 't'
+};
+
+var bodyOptions ={
+  describe : 'Body of note',
+  demand : true,
+  alias : 'b'
+};
+
+var argv = yargs
+.command('add', 'Add a new note',{
+  title : titleOptions,
+  body : bodyOptions
+})
+.command('list', 'List all notes')
+.command('read', 'Read a note',{ title : titleOptions })
+.command('remove', 'Remove a note', { title : titleOptions })
+.help()
+.argv;
+
+var command = argv._[0];
 
 if (command === 'add') {
   var note = notes.addNote(argv.title, argv.body);
@@ -33,7 +51,9 @@ if (command === 'add') {
     notes.logNote(note)
   }
 } else if (command === 'list') {
-  notes.getAll()
+  var allNotes = notes.getAll();
+  console.log(`Printing ${allNotes.length} note(s).\n`);
+  allNotes.forEach((note)=> notes.logNote(note));
 } else if (command === 'read') {
   var getNote = notes.getNote(argv.title)
   var message = getNote ? notes.logNote(getNote) : 'Note not found';
