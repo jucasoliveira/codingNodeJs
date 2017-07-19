@@ -28,4 +28,5 @@ var geocodeAdress = (geoaddress, callback)=> {
 module.exports = {
   geocodeAdress
 };
-//or module.exports.geocodeAdress = geocodeAdress;
+//or
+//module.exports.geocodeAdress = geocodeAdress;

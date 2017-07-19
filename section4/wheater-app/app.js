@@ -23,3 +23,6 @@ geocode.geocodeAdress(argv.address, (errorMessage, results) =>{
     console.log(JSON.stringify(results, undefined, 2));
   }
 });
+
+
+//test
